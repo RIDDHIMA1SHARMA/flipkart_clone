@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f3f6;
+        }
+        .header {
+            background-color: #2874f0;
+            padding: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar {
+            background-color: #0077e6;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar-item {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .navbar-item:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            min-width: 200px;
+        }
+
+        .dropdown-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu:hover .submenu {
+            display: block;
+        }
+
+
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background-color: #fff;
+            color: #000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            min-width: 200px;
+        }
+
+        .submenu-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .submenu-item:hover {
+            background-color: #f0f0f0;
+        }
+        .header input {
+            width: 300px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .image-gallery {
+            flex: 1;
+            padding: 20px;
+        }
+        .image-gallery img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .thumbnails {
+            display: flex;
+            margin-top: 10px;
+            gap: 10px;
+        }
+        .thumbnails img {
+            width: 60px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .thumbnails img:hover {
+            border-color: #2874f0;
+        }
+        .product-details {
+            flex: 2;
+            padding: 20px;
+        }
+        .product-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 20px;
+            color: #388e3c;
+            margin-bottom: 10px;
+        }
+        .rating {
+            font-size: 14px;
+            color: #ff9f00;
+            margin-bottom: 20px;
+        }
+        .size-selection {
+            margin-bottom: 20px;
+        }
+        .size-selection span {
+            display: inline-block;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .size-selection span:hover {
+            border-color: #2874f0;
+        }
+        .offers {
+            margin-bottom: 20px;
+        }
+        .offers ul {
+            list-style: none;
+            padding: 0;
+        }
+        .offers ul li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .offers ul li::before {
+            content: '\2713';
+            color: green;
+            margin-right: 10px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons button {
+            padding: 15px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        .add-to-cart {
+            background-color: orange;
+            color: white;
+        }
+        .buy-now {
+            background-color: #2874f0;
+            color: white;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 15px;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .card h3 {
+            font-size: 16px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: green;
+            margin: 0;
+        }
+        .footer {
+            background-color: #232f3e;
+            color: #ffffff;
+            padding: 40px 20px;
+        }
+        .footer .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .footer .footer-column {
+            flex: 1 1 20%;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+        .footer .footer-column h4 {
+            margin-bottom: 15px;
+            font-size: 16px;
+            border-bottom: 2px solid #ffffff;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .footer .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer .footer-column ul li {
+            margin: 8px 0;
+        }
+        .footer .footer-column ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .footer .footer-column ul li a:hover {
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            border-top: 1px solid #ffffff;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4>Get to Know Us</h4>
+                <ul>
+                    <li><a href="#">About Amazon</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">Amazon Science</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Connect with Us</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Make Money with Us</h4>
+                <ul>
+                    <li><a href="#">Sell on Amazon</a></li>
+                    <li><a href="#">Sell under Amazon Accelerator</a></li>
+                    <li><a href="#">Amazon Global Selling</a></li>
+                    <li><a href="#">Advertise Your Products</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Let Us Help You</h4>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Returns Centre</a></li>
+                    <li><a href="#">100% Purchase Protection</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 Amazon | All Rights Reserved
+        </div>
+    </footer>
+    <div class="container">
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="Men's Jacket">
+            <h3>Men's Jackets</h3>
+            <p>Min. 50% Off</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="Men's Sweater">
+            <h3>Men's Sweaters</h3>
+            <p>Min. 50% Off</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="Air Conditioners">
+            <h3>Air Conditioners</h3>
+            <p>Min. 50% Off</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="Televisions">
+            <h3>Televisions</h3>
+            <p>Min. 30% Off</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="Bed Mattress">
+            <h3>Bed Mattress</h3>
+            <p>Min. 50% Off</p>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/150" alt="Office Chair">
+            <h3>Office Study Chair</h3>
+            <p>Min. 50% Off</p>
+        </div>
+    </div>
+    </div>
+    <div class="navbar">
+        <div class="navbar-logo">Flipkart</div>
+        <div class="navbar-menu">
+            <div class="navbar-item">Electronics
+                <div class="dropdown">
+                    <div class="dropdown-item">Mobiles</div>
+                    <div class="dropdown-item">Laptops</div>
+                    <div class="dropdown-submenu">Mobile Accessories
+                        <div class="dropdown-item">hey hello</div>
+                        <div class="dropdown-item">gaming</div>
+                        <div class="dropdown-item">laptop-accesories</div>
+                        <div class="dropdown-item">mobileAccesories</div>
+                        <div class="dropdown-item">powerbank</div>
+                        <div class="dropdown-item">smart home automation</div>
+                        <div class="dropdown-item">smart wearables</div>
+                        <div class="dropdown-item">smart items</div>
+                        <div class="submenu">
+                            <div class="submenu-item">Power Banks</div>
+                            <div class="submenu-item">Screen Guards</div>
+                            <div class="submenu-item">Cables</div>
+                        </div>
+                    </div>
+                    <div class="dropdown-item">Cameras</div>
+                </div>
+            </div>
+            <div class="navbar-item">TVs & Appliances</div>
+            <div class="dropdown"></div>
+                <div class="dropdown-item">drrrrrr</div>
+
+            <div class="navbar-item">Men</div>
+            <div class="navbar-item">Women</div>
+            <div class="navbar-item">Baby & Kids</div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="logo">Flipkart</div>
+        <input type="text" placeholder="Search for products, brands, and more">
+    </div>
+
+    <div class="container">
+        <!-- Image Gallery -->
+        <div class="image-gallery">
+            <img id="main-image" src="https://via.placeholder.com/400" alt="Main Product">
+            <div class="thumbnails">
+                <img src="https://via.placeholder.com/60" onclick="changeImage(this.src)" alt="Thumb 1">
+                <img src="https://via.placeholder.com/60" onclick="changeImage(this.src)" alt="Thumb 2">
+                <img src="https://via.placeholder.com/60" onclick="changeImage(this.src)" alt="Thumb 3">
+                <img src="https://via.placeholder.com/60" onclick="changeImage(this.src)" alt="Thumb 4">
+            </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="product-details">
+            <div class="product-title">Women Chikan Embroidery Rayon Straight Kurta (Pink)</div>
+            <div class="price">&#8377;459 <span style="text-decoration: line-through; color: gray;">&#8377;2599</span> (82% off)</div>
+            <div class="rating">3.9 &#9733; | 2,334 ratings and 102 reviews</div>
+            <div class="size-selection">
+                <strong>Size:</strong>
+                <span>S</span>
+                <span>M</span>
+                <span>L</span>
+                <span>XL</span>
+                <span>XXL</span>
+            </div>
+            <div class="offers">
+                <strong>Available Offers:</strong>
+                <ul>
+                    <li>5% Unlimited Cashback on Flipkart Axis Bank Credit Card</li>
+                    <li>12% off up to ₹1,000 on HDFC Bank Credit Card EMI</li>
+                    <li>Special Price Get at ₹459</li>
+                </ul>
+            </div>
+            <div class="buttons">
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="buy-now">Buy Now</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function changeImage(src) {
+            document.getElementById('main-image').src = src;
+        }
+    </script>
+</body>
+</html>
